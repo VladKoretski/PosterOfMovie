@@ -14,12 +14,10 @@ public class MoviePosterManagerTest {
     MovieName movie7 = new MovieName("Movie 7");
     MovieName movie8 = new MovieName("Movie 8");
     MovieName[] posters = {movie1, movie2, movie3, movie4, movie5, movie6, movie7, movie8};
-
-    MoviePosterManager managerDefaultConstruction = new MoviePosterManager();
-    MoviePosterManager managerWithResultLength = new MoviePosterManager(7);
     MoviePosterManager managerWithPosters = new MoviePosterManager(posters);
     MoviePosterManager managerWithPosterAndResultLengthConstruction = new MoviePosterManager(posters, 7);
-
+    MoviePosterManager managerDefaultConstruction = new MoviePosterManager();
+    MoviePosterManager managerWithResultLength = new MoviePosterManager(7);
 
     //Getters and Setters testing
     //DefaultConstruction
@@ -50,7 +48,7 @@ public class MoviePosterManagerTest {
 
     //Poster Construction
     @Test
-    public void ShouldGetPostersForPostersConstruction () {
+    public void ShouldGetPostersForPostersConstruction() {
         MovieName[] expectedPosters = {movie1, movie2, movie3, movie4, movie5, movie6, movie7, movie8};
         MovieName[] actualPosters = managerWithPosters.getPosters();
         Assertions.assertArrayEquals(expectedPosters, actualPosters);
