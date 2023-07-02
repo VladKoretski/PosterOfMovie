@@ -2,8 +2,8 @@ package ru.netology;
 
 public class MoviePosterManager {
 
-    public MovieName[] posters = new MovieName[0];
-    int resultLength = 5;
+    private int resultLength = 5;
+    private MovieName[] posters = new MovieName[0];
 
     // Constructors
     public MoviePosterManager() {
@@ -24,6 +24,23 @@ public class MoviePosterManager {
         this.resultLength = resultLength;
     }
 
+    //setters and getters
+    public MovieName[] getPosters() {
+        return posters;
+    }
+
+    public void setPosters(MovieName[] posters) {
+        this.posters = posters;
+    }
+
+    public int getResultLength() {
+        return resultLength;
+    }
+
+    public void setResultLength(int newResultLength) {
+        this.resultLength = newResultLength;
+    }
+
     // File adding
     public void addNewMovie(MovieName nameOfMovie) {
 
@@ -34,11 +51,10 @@ public class MoviePosterManager {
     }
 
     //Manager's arts
-    public MovieName[] getPosters() {
-        return posters;
-    }
+
 
     public MovieName[] findAll() {
+
         return posters;
     }
 

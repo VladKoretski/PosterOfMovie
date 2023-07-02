@@ -13,17 +13,100 @@ public class MoviePosterManagerTest {
     MovieName movie6 = new MovieName("Movie 6");
     MovieName movie7 = new MovieName("Movie 7");
     MovieName movie8 = new MovieName("Movie 8");
-
     MovieName[] posters = {movie1, movie2, movie3, movie4, movie5, movie6, movie7, movie8};
-    MoviePosterManager managerForResultLengthAndMoviePoster = new MoviePosterManager(posters, 3);
-    MovieName[] postersShortList = {movie1, movie2, movie3};
-    MoviePosterManager managerForShortList = new MoviePosterManager(postersShortList);
-    MoviePosterManager managerForDefaultResultLength = new MoviePosterManager();
-    MoviePosterManager managerForResultLength3 = new MoviePosterManager(3);
-    MoviePosterManager managerForResultLength7 = new MoviePosterManager(7);
+
+    MoviePosterManager managerDefaultConstruction = new MoviePosterManager();
+    MoviePosterManager managerWithResultLength = new MoviePosterManager(7);
+    MoviePosterManager managerWithPosters = new MoviePosterManager(posters);
+    MoviePosterManager managerWithPosterAndResultLengthConstruction = new MoviePosterManager(posters, 7);
+
+
+    //Getters and Setters testing
+    //DefaultConstruction
+    @Test
+    public void ShouldGetPosterAndResultLength() {
+        MoviePosterManager manager = new MoviePosterManager();
+        MovieName[] expectedPosters = {};
+        MovieName[] actualPosters = manager.getPosters();
+        int expectedResultLength = 5;
+        int actualResultLength = manager.getResultLength();
+
+        Assertions.assertArrayEquals(expectedPosters, actualPosters);
+        Assertions.assertEquals(expectedResultLength, actualResultLength);
+    }
+
+    @Test
+    public void ShouldSetPostersAndResultLength() {
+        managerDefaultConstruction.setPosters(posters);
+        MovieName[] expectedPosters = {movie1, movie2, movie3, movie4, movie5, movie6, movie7, movie8};
+        MovieName[] actualPosters = managerDefaultConstruction.getPosters();
+        managerDefaultConstruction.setResultLength(7);
+        int expectedResultLength = 7;
+        int actualResultLength = managerDefaultConstruction.getResultLength();
+
+        Assertions.assertArrayEquals(expectedPosters, actualPosters);
+        Assertions.assertEquals(expectedResultLength, actualResultLength);
+    }
+
+    //Poster Construction
+    @Test
+    public void ShouldGetPostersForPostersConstruction () {
+        MovieName[] expectedPosters = {movie1, movie2, movie3, movie4, movie5, movie6, movie7, movie8};
+        MovieName[] actualPosters = managerWithPosters.getPosters();
+        Assertions.assertArrayEquals(expectedPosters, actualPosters);
+    }
+
+    //ResultLength Construction
+    @Test
+    public void ShouldGetPostersAndResultLengthForResultLengthConstructor() {
+        MovieName[] expectedPosters = {};
+        MovieName[] actualPosters = managerWithResultLength.getPosters();
+        int expectedResultLength = 7;
+        int actualResultLength = managerWithResultLength.getResultLength();
+
+        Assertions.assertArrayEquals(expectedPosters, actualPosters);
+        Assertions.assertEquals(expectedResultLength, actualResultLength);
+    }
+
+    @Test
+    public void ShouldSetPostersAndResultLengthForResultLengthConstructor() {
+        managerWithResultLength.setPosters(posters);
+        MovieName[] expectedPosters = {movie1, movie2, movie3, movie4, movie5, movie6, movie7, movie8};
+        MovieName[] actualPosters = managerWithResultLength.getPosters();
+        managerWithResultLength.setResultLength(6);
+        int expectedResultLength = 6;
+        int actualResultLength = managerWithResultLength.getResultLength();
+
+        Assertions.assertArrayEquals(expectedPosters, actualPosters);
+        Assertions.assertEquals(expectedResultLength, actualResultLength);
+    }
+
+    //Result Length and Poster Constructor
+    @Test
+    public void ShouldGetPostersAndResultLengthForPosterAndResultLengthConstructor() {
+        MovieName[] expectedPosters = {movie1, movie2, movie3, movie4, movie5, movie6, movie7, movie8};
+        MovieName[] actualPosters = managerWithPosterAndResultLengthConstruction.getPosters();
+        int expectedResultLength = 7;
+        int actualResultLength = managerWithPosterAndResultLengthConstruction.getResultLength();
+
+        Assertions.assertArrayEquals(expectedPosters, actualPosters);
+        Assertions.assertEquals(expectedResultLength, actualResultLength);
+    }
+
+    @Test
+    public void ShouldSetPostersAndResultLengthForPosterAndResultLengthConstructor() {
+        managerWithPosterAndResultLengthConstruction.setPosters(posters);
+        MovieName[] expectedPosters = {movie1, movie2, movie3, movie4, movie5, movie6, movie7, movie8};
+        MovieName[] actualPosters = managerWithPosterAndResultLengthConstruction.getPosters();
+        managerWithPosterAndResultLengthConstruction.setResultLength(6);
+        int expectedResultLength = 6;
+        int actualResultLength = managerWithPosterAndResultLengthConstruction.getResultLength();
+
+        Assertions.assertArrayEquals(expectedPosters, actualPosters);
+        Assertions.assertEquals(expectedResultLength, actualResultLength);
+    }
 
     // Add movies testing
-
     @Test
     public void shouldCheckAddSomeMovie() {
 
@@ -34,105 +117,113 @@ public class MoviePosterManagerTest {
         manager.addNewMovie(newMovie2);
         MovieName newMovie3 = new MovieName("movie 3");
         manager.addNewMovie(newMovie3);
-
         MovieName[] expected = {newMovie1, newMovie2, newMovie3};
         MovieName[] actual = manager.findAll();
 
         Assertions.assertArrayEquals(expected, actual);
     }
 
-    //Constructors Testing
+    //Find All and Find Last testing
+    //FindAll Testing
+    @Test
+    public void shouldFindAllForBasicConstructor() {
+        MoviePosterManager manager = new MoviePosterManager();
+        MovieName[] expected = {};
+        MovieName[] actual = manager.findAll();
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    //FindAll and FindLast for none-zero poster matrices
     @BeforeEach
     public void setup() {
 
         //Test data for basic constructor
-        managerForDefaultResultLength.addNewMovie(movie1);
-        managerForDefaultResultLength.addNewMovie(movie2);
-        managerForDefaultResultLength.addNewMovie(movie3);
-        managerForDefaultResultLength.addNewMovie(movie4);
-        managerForDefaultResultLength.addNewMovie(movie5);
-        managerForDefaultResultLength.addNewMovie(movie6);
-        managerForDefaultResultLength.addNewMovie(movie7);
-        managerForDefaultResultLength.addNewMovie(movie8);
-
-        //Test data for constructor with resultLength = 3
-        managerForResultLength3.addNewMovie(movie1);
-        managerForResultLength3.addNewMovie(movie2);
-        managerForResultLength3.addNewMovie(movie3);
-        managerForResultLength3.addNewMovie(movie4);
-        managerForResultLength3.addNewMovie(movie5);
-        managerForResultLength3.addNewMovie(movie6);
-        managerForResultLength3.addNewMovie(movie7);
-        managerForResultLength3.addNewMovie(movie8);
-
-        //Test data for constructor with resultLength = 7
-        managerForResultLength7.addNewMovie(movie1);
-        managerForResultLength7.addNewMovie(movie2);
-        managerForResultLength7.addNewMovie(movie3);
-        managerForResultLength7.addNewMovie(movie4);
-        managerForResultLength7.addNewMovie(movie5);
-        managerForResultLength7.addNewMovie(movie6);
-        managerForResultLength7.addNewMovie(movie7);
-        managerForResultLength7.addNewMovie(movie8);
+        managerDefaultConstruction.addNewMovie(movie1);
+        managerDefaultConstruction.addNewMovie(movie2);
+        managerDefaultConstruction.addNewMovie(movie3);
+        managerDefaultConstruction.addNewMovie(movie4);
+        managerDefaultConstruction.addNewMovie(movie5);
+        managerDefaultConstruction.addNewMovie(movie6);
+        managerDefaultConstruction.addNewMovie(movie7);
+        managerDefaultConstruction.addNewMovie(movie8);
     }
 
-    // Basic constructor testing
     @Test
-    public void shouldFindAllForBasicConstructor() {
+    public void shouldFindAllForBasicConstructor1() {
+        MoviePosterManager manager = new MoviePosterManager();
+        MovieName[] expected = {};
+        MovieName[] actual = manager.findAll();
 
-        MovieName[] expected = {movie1, movie2, movie3, movie4, movie5, movie6, movie7, movie8};
-        MovieName[] actual = managerForDefaultResultLength.findAll();
         Assertions.assertArrayEquals(expected, actual);
     }
 
     @Test
-    public void shouldFindLastForBasicConstructor() {
+    public void shouldFindAllForPosterConstruction() {
+        MovieName[] expected = {movie1, movie2, movie3, movie4, movie5, movie6, movie7, movie8};
+        MovieName[] actual = managerDefaultConstruction.findAll();
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    // FindLast for different ResultLength: default = 5; 3; 4; 7);
+    //For 5
+    @Test
+    public void shouldFindLastForDefaultResultLength() {
         MovieName[] expected = {movie8, movie7, movie6, movie5, movie4};
-        MovieName[] actual = managerForDefaultResultLength.findLast();
+        MovieName[] actual = managerDefaultConstruction.findLast();
+
         Assertions.assertArrayEquals(expected, actual);
     }
 
-    // FindLast testing for list of poster is shorter than ResultLength
+    //For 3
     @Test
-    public void shouldFindLastForBasicConstructorWithShortList() {
-        MovieName[] expected = {movie3, movie2, movie1};
-        MovieName[] actual = managerForShortList.findLast();
-        Assertions.assertArrayEquals(expected, actual);
-    }
-
-    // Constructor with ResultLength=3 testing
-    @Test
-    public void shouldFindAllForConstructorWithResultLength3() {
-
-        MovieName[] expected = {movie1, movie2, movie3, movie4, movie5, movie6, movie7, movie8};
-        MovieName[] actual = managerForResultLength3.findAll();
-        Assertions.assertArrayEquals(expected, actual);
-    }
-
-    @Test
-    public void shouldFindLastForConstructorWithResultLength3() {
+    public void shouldFindLastResultLength3() {
         MovieName[] expected = {movie8, movie7, movie6};
-        MovieName[] actual = managerForResultLength3.findLast();
+        managerDefaultConstruction.setResultLength(3);
+        MovieName[] actual = managerDefaultConstruction.findLast();
+
         Assertions.assertArrayEquals(expected, actual);
     }
 
-    // Constructor with ResultLength=7 testing
+    //For 4
     @Test
-    public void shouldFindAllForConstructorWithResultLength7() {
-        MovieName[] expected = {movie1, movie2, movie3, movie4, movie5, movie6, movie7, movie8};
-        MovieName[] actual = managerForResultLength7.findAll();
+    public void shouldFindLastResultLength4() {
+        MovieName[] expected = {movie8, movie7, movie6, movie5};
+        managerDefaultConstruction.setResultLength(4);
+        MovieName[] actual = managerDefaultConstruction.findLast();
+
         Assertions.assertArrayEquals(expected, actual);
     }
+
+    //For 6
     @Test
-    public void shouldFindLastForConstructorWithResultLength7() {
+    public void shouldFindLastResultLength6() {
+        MovieName[] expected = {movie8, movie7, movie6, movie5, movie4, movie3};
+        managerDefaultConstruction.setResultLength(6);
+        MovieName[] actual = managerDefaultConstruction.findLast();
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    //For 7
+    @Test
+    public void shouldFindLastResultLength7() {
         MovieName[] expected = {movie8, movie7, movie6, movie5, movie4, movie3, movie2};
-        MovieName[] actual = managerForResultLength7.findLast();
+        managerDefaultConstruction.setResultLength(7);
+        MovieName[] actual = managerDefaultConstruction.findLast();
+
         Assertions.assertArrayEquals(expected, actual);
     }
+
     @Test
-    public void shouldCheckConstructorPostersAndLength() {
-        MovieName[] expected = {movie1, movie2, movie3, movie4, movie5, movie6, movie7, movie8};
-        MovieName[] actual = managerForResultLengthAndMoviePoster.getPosters();
+    //For empty poster
+    public void shouldFindLastEmptyPoster() {
+        MovieName[] expected = {};
+        MoviePosterManager manager = new MoviePosterManager();
+        MovieName[] actual = manager.findLast();
+
         Assertions.assertArrayEquals(expected, actual);
     }
+
 }

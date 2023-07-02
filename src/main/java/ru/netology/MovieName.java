@@ -1,7 +1,7 @@
 package ru.netology;
 
 public class MovieName {
-    String nameOfMovie;
+    private String nameOfMovie;
 
     public MovieName(String nameOfMovie) {
         this.nameOfMovie = nameOfMovie;
