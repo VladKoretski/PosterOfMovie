@@ -214,8 +214,8 @@ public class MoviePosterManagerTest {
         Assertions.assertArrayEquals(expected, actual);
     }
 
-    @Test
     //For empty poster
+    @Test
     public void shouldFindLastEmptyPoster() {
         MovieName[] expected = {};
         MoviePosterManager manager = new MoviePosterManager();
